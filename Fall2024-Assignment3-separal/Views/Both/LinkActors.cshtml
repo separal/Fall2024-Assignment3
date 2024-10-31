@@ -1,0 +1,30 @@
+﻿@model Fall2024_Assignment3_separal.Models.MovieActorsViewModel
+
+<h2>Manage Actors for @Model.Movie.Title</h2>
+
+<h3>Current Actors</h3>
+<ul>
+    @foreach (var movieActor in Model.Movie.MovieActors)
+    {
+        <li>
+            @movieActor.Actor.Name
+            <form asp-action="RemoveActorFromMovie" method="post" style="display:inline;">
+                <input type="hidden" name="movieId" value="@Model.Movie.Id" />
+                <input type="hidden" name="actorId" value="@movieActor.ActorId" />
+                <button type="submit">Remove</button>
+            </form>
+        </li>
+    }
+</ul>
+
+<h3>Add an Actor</h3>
+<form asp-action="AddActorToMovie" method="post">
+    <input type="hidden" name="movieId" value="@Model.Movie.Id" />
+    <select name="actorId">
+        @foreach (var actor in Model.AvailableActors)
+        {
+            <option value="@actor.Id">@actor.Name</option>
+        }
+    </select>
+    <button type="submit">Add</button>
+</form>

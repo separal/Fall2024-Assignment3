@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Fall2024_Assignment3_separal.Models.Movies.Movie>
+
+<h2>Movies and Linked Actors</h2>
+<ul>
+    @foreach (var movie in Model)
+    {
+        <li>
+            <strong>@movie.Title</strong> (Year: @movie.Year) - Actors:
+            <ul>
+                @foreach (var movieActor in movie.MovieActors)
+                {
+                    <li>@movieActor.Actor.Name</li>
+                }
+            </ul>
+            <a href="@Url.Action("LinkActors", "Both", new { movieId = movie.Id })">Manage Actors</a>
+        </li>
+    }
+</ul>
